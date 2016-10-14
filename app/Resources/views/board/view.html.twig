@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('public/skin/board.css') }}" type="text/css" media="screen, projection" />
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('public/jslib/external/jquery.mousewheel.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('public/jslib/pages/Board/__init__.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('public/jslib/pages/Board/board.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('public/jslib/pages/Board/stickers.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('public/jslib/pages/Board/dialogs.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('public/jslib/pages/Board/toolbar.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('public/jslib/repo/Acl/__init__.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('public/jslib/repo/Registry/__init__.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('public/jslib/repo/Registry/storage.js') }}"></script>
+{% endblock %}
+
+{% block body_class %}Board{% endblock %}
+
+{% block body %}
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="brand" href="/">{{ board.name }}</a>
+                <div class="nav-collapse">
+                    <div class="pull-right">
+                        <ul class="nav">
+                            <li class="zoom-in"><a href="#" title="Zoom in"><span class="hide">Zoom in</span></a></li>
+                            <li class="zoom-out"><a href="#" title="Zoom out"><span class="hide">Zoom out</span></a></li>
+                            <li class="separate"><div></div></li>
+                            <li class="order"><a href="#" title="Order"><span class="hide">Order</span></a></li>
+                            <li class="separate"><div></div></li>
+                            <li class="close-window"><a href="#" title="Close"><span class="hide">Close</span></a></li>
+                        </ul>
+                        <div class="scale"><span>100</span>%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="wrapper">
+        <div id="content">
+            <div id="agile-board">
+                <div class="garbage"></div>
+            </div>
+        </div><!-- #content-->
+    </div>
+
+    <div id="modal-sticker-new" class="sticker-modal modal hide">
+        <div id="" class="sticker" data-style="" data-orig-top="" data-orig-left="">
+            <textarea class="round" autofocus="autofocus"></textarea>
+            <div class="panel round">
+                <a href="#" class="big" title="Big size"></a>
+                <a href="#" class="medium" title="Medium size"></a>
+                <a href="#" class="small" title="Small size"></a>
+                <a href="#" class="strike" title="Strike"></a>
+            </div>
+            <ul class="colors">
+                {% for style in styles %}
+                <li class="{{ style.style }}"><span>{{ style.name }}</span></li>
+                {% endfor %}
+                <li class="green"><span>{{ styles[0].name }}</span></li>
+            </ul>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        window.CaterJS.repo.Registry.namespace( 'board' ).set( 'config', {
+            id: '#agile-board'
+            , project: '{{ board.id }}'
+            , login: '<?=$login;?>'
+            , role: 'admin'
+            , style: 'green'
+            , font: 'small'
+            , margin: '50'
+            , point: '10'
+        });
+        window.CaterJS.pages.Board.board.setList({{ stickers | json_encode | raw }});
+    </script>
+{% endblock %}
+

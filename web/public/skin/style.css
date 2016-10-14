@@ -1,0 +1,51 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+html {
+	height: 100%;
+}
+header, nav, section, article, aside, footer {
+	display: block;
+}
+body {
+	font: 12px/18px Arial, Tahoma, Verdana, sans-serif;
+	height: 100%;
+	background: #f2f2f2;
+	overflow: hidden;
+}
+p {
+	margin: 0 0 18px
+}
+img {
+	border: none;
+}
+input {
+	vertical-align: middle;
+}
+#wrapper {
+	width: 100%;
+	min-width: 1000px;
+	min-height: 100%;
+	height: auto !important;
+	height: 100%;
+}
+
+
+/* Middle
+-----------------------------------------------------------------------------*/
+#content {
+	margin-top: 60px;
+	padding: 0 0 20px;
+	overflow: hidden;
+	background:#f2f2f2;
+}
+
+.project-list {
+	margin: 20px 0 0 30px;
+}
+
+
+#content ul li {
+	margin-bottom: 20px;
+}

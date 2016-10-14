@@ -1,0 +1,25 @@
+AppBundle\Entity\Board:
+    type: entity
+    table: board
+    repositoryClass: AppBundle\Repository\BoardRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+            options:
+                unsigned: true
+    fields:
+        name:
+            type: string
+            length: 255
+        description:
+            type: text
+            nullable: true
+
+    oneToMany:
+        stickers:
+            targetEntity: Sticker
+            mappedBy: board
+    lifecycleCallbacks: {  }

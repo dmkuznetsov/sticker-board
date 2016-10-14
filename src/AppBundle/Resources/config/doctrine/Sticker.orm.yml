@@ -1,0 +1,43 @@
+AppBundle\Entity\Sticker:
+    type: entity
+    table: sticker
+    repositoryClass: AppBundle\Repository\StickerRepository
+    id:
+        id:
+            type: bigint
+            id: true
+            generator:
+                strategy: AUTO
+            options:
+                unsigned: true
+    fields:
+        positionX:
+            type: integer
+            column: position_x
+        positionY:
+            type: integer
+            column: position_y
+        text:
+            type: text
+            nullable: true
+        size:
+            type: string
+            length: '32'
+        isStriked:
+            type: boolean
+            column: is_striked
+
+    manyToOne:
+        board:
+            targetEntity: Board
+            inversedBy: stickers
+            joinColumn:
+                name: board_id
+                referencedColumnName: id
+        style:
+            targetEntity: Style
+            joinColumn:
+                name: style_id
+                referencedColumnName: id
+
+    lifecycleCallbacks: {  }

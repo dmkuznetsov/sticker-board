@@ -1,0 +1,7 @@
+<!-- pages/Board : pages -->
+<script type="text/javascript" src="./images/jslib/pages/Board/__init__.js"></script>
+<script type="text/javascript" src="./images/jslib/pages/Board/board.js"></script>
+<script type="text/javascript" src="./images/jslib/pages/Board/stickers.js"></script>
+<script type="text/javascript" src="./images/jslib/pages/Board/dialogs.js"></script>
+<script type="text/javascript" src="./images/jslib/pages/Board/toolbar.js"></script>
+<!-- /pages/Board : pages -->

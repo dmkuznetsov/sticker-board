@@ -1,0 +1,374 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+html {
+	height: 100%;
+	font-size: 100%;
+}
+header, nav, section, article, aside, footer {
+	display: block;
+}
+body {
+	font: Tahoma, Verdana, sans-serif;
+	font-size: 0.625em;
+	height: 100%;
+	background: #f2f2f2;
+	overflow: hidden;
+}
+
+.container {
+	/*padding: 0 30px;*/
+	width: 95% !important;
+}
+.navbar .brand {
+	float: left;
+}
+.navbar .readonly {
+	width: 150px;
+	height: 20px;
+	margin: 10px 0 0 10px;
+	padding: 0 0 0 30px;
+	background: url(/public/img/icon-read-only.png) left center no-repeat;
+	float: left;
+	color: #fff;
+	font-size: 15px !important;
+}
+.navbar .nav {
+	margin: 0;
+	padding: 0;
+	height: 20px;
+}
+.navbar .scale {
+	font-size: 14px;
+	color: #fff !important;
+	float: left;
+	margin: 10px 25px 0 0;
+}
+.navbar .online {
+	font-size: 14px;
+	color: #fff !important;
+	float: left;
+	margin: 10px 25px 0 0;
+}
+.navbar .online a {
+	color: #59ff9a;
+	border-bottom: 1px dotted #fff;
+}
+.navbar .online a:hover {
+	text-decoration: none;
+	border: 0; 
+}
+.offline a {
+    color: #d93420 !important;
+}
+.navbar .nav {
+	float: right;
+}
+.navbar .nav li {
+	display: block;
+	width: 33px;
+	height: 29px;
+	margin: 5px 3px 0 3px;
+}
+.navbar .nav .separate {
+	width: 5px;
+}
+.navbar .nav .separate div {
+	margin: 0 auto;
+	width: 1px;
+	height: 100%;
+	background-color: #999;
+}
+.navbar .nav li a {
+	display: block;
+	width: 33px;
+	height: 29px;
+	margin: 0;
+	padding: 0;
+}
+.navbar .nav li a:active {
+	padding-top: 1px;
+}
+.navbar .nav .zoom-in a {
+	background: url(/public/img/icon-zoom-in.png) center no-repeat;
+}
+.navbar .nav .zoom-out a {
+	background: url(/public/img/icon-zoom-out.png) center no-repeat;
+}
+.navbar .nav .order a {
+	background: url(/public/img/icon-order.png) center no-repeat;
+}
+.navbar .nav .close-window a {
+	background: url(/public/img/icon-close.png) center no-repeat;
+}
+
+
+.graggable {
+	cursor: move;
+}
+
+
+#agile-board {
+	margin: 30px 0 0 2em;
+	position: relative;
+	width: 800em;
+	height: 300em;
+	background: #fff url(/public/img/bg.gif);
+}
+
+.sticker {
+	width: 15em;
+	height: 15em;
+	padding: 1em;
+	white-space: pre;
+	white-space: pre-wrap;
+	white-space: pre-line;
+	white-space: -pre-wrap;
+	white-space: -o-pre-wrap;
+	white-space: -moz-pre-wrap;
+	white-space: -hp-pre-wrap;
+	word-wrap: break-word;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 20em 18em;
+	background-image: url(/public/img/shadow.png);
+	background-color: #aaaae0;
+	color: #222;
+	text-align: center;
+}
+
+
+.modal-backdrop {
+	background-color: #fff;
+}
+.modal-backdrop, 
+.modal-backdrop.fade.in {
+	opacity: 0.2;
+}
+
+.sticker-modal {
+	width: 20em;
+	height: 20em;
+	background: transparent;
+	overflow: hidden !important;
+	padding: 0.2em;
+}
+
+.modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 1050;
+	overflow: auto;
+	margin: 0;
+	border: 0;
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	border-radius: 0;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: 0;
+	box-shadow: 0;
+	-webkit-background-clip: padding-box;
+	-moz-background-clip: padding-box;
+	background-clip: padding-box;
+}
+
+
+/*.sticker .top {
+	margin: 0;
+	padding: 0;
+	white-space: normal;
+	position: absolute;
+	top: -1.8em;
+	right: -1.8em;
+	width: 6em;
+	height: 2.4em;
+	background: none;
+}
+.sticker .top a {
+	display: block;
+	margin: 0;
+	padding: 0;
+	width: 2.6em;
+	height: 2.6em;
+	background-size: 2.4em;
+	background-position: center;
+	background-repeat: no-repeat;
+	float: left;
+}
+.sticker .top a:active {
+	padding-top: 1px;
+}
+.sticker .top .edit {
+	background-image: url(/public/img/icon-edit.png);
+}
+.sticker .top .delete {
+	background-image: url(/public/img/icon-trash.png);
+}
+.sticker .top .ok {
+	background-image: url(/public/img/icon-ok.png);
+}
+.sticker .top .cancel {
+	background-image: url(/public/img/icon-cancel.png);
+}*/
+
+
+
+
+.sticker .panel {
+	position: absolute;
+	top: 0.6em;
+	right: 0.3em;
+	width: 3em;
+	height: 16em;
+	background-size: 100%;
+	background-color: #D3D1D1;
+	white-space: normal;
+}
+.sticker .panel a {
+	display: block;
+	margin: 0.2em;
+	padding: 0;
+	width: 2.6em;
+	height: 2.6em;
+	background-size: 2.4em;
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+	float: left;
+}
+.sticker .panel a:active {
+	background-position: 50% 80%;
+}
+.sticker .panel .big {
+	background-image: url(/public/img/icon-text-big.png);
+}
+.sticker .panel .medium {
+	background-image: url(/public/img/icon-text-middle.png);
+}
+.sticker .panel .small {
+	background-image: url(/public/img/icon-text-small.png);
+}
+.sticker .panel .strike {
+	background-image: url(/public/img/icon-text-strike.png);
+}
+.sticker .panel .emo {
+	margin-top: 1em;
+	background-image: url(/public/img/icon-emo.png);
+}
+
+
+.sticker .colors {
+	white-space: normal;
+	position: absolute;
+	bottom: 1em;
+	left: -2.2em;
+	width: 17.5em;
+	height: 2.1em;
+	list-style-type: none;
+}
+.sticker .colors li {
+	display: block;
+	margin: 0;
+	padding: 0;
+	width: 2.1em;
+	height: 2.1em;
+	float: left;
+	cursor: pointer;
+	background-position: left bottom !important;
+}
+.sticker .colors li span {
+	display: none;
+}
+.sticker .colors .current {
+	margin-top: -0.7em;
+}
+
+
+.sticker p {
+	width: 84%;
+	height: 84%;
+	top: 8.5%;
+	left: 8.5%;
+	position: absolute;
+	font: normal 1.8em Verdana;
+	overflow: hidden;
+}
+.sticker textarea {
+	width: 71%;
+	height: 71%;
+	top: 5%;
+	left: 5%;
+	min-width: 71%;
+	min-height: 71%;
+	max-width: 71%;
+	max-height: 71%;
+	position: absolute;
+	font: normal 1.8em Verdana;
+	color: #000;
+	border: 1px dashed #666;
+	background: transparent;
+	text-align: center;
+	overflow: hidden;
+	outline: 0;
+	padding: 0.25em 0 0 0.2em;
+}
+
+.sticker p.big,
+.sticker textarea.big {
+	font-size: 3em;
+}
+.sticker p.medium,
+.sticker textarea.medium {
+	font-size: 2.2em;
+}
+.sticker p.small,
+.sticker textarea.small {
+	font-size: 1.8em;
+}
+.sticker p.strike,
+.sticker textarea.strike {
+	text-decoration: line-through;
+}
+
+
+.green {
+	background-color: #5ad67b !important;
+}
+.blue {
+	background-color: #005ac7 !important;
+}
+.light-blue {
+	background-color: #7fb9ff !important;
+}
+.orange {
+	background-color: #ffb624 !important;
+}
+.purple {
+	background-color: #c953db !important;
+}
+.red {
+	background-color: #ff3b3b !important;
+}
+.yellow {
+	background-color: #f9ff3d !important;
+}
+
+.round {
+	-moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.garbage {
+	position: fixed;
+	bottom: 10px;
+	right: 10px;
+	width: 162px;
+	height: 173px;
+	background: url(/public/img/garbage.png) top center no-repeat;
+	display: none;
+}
+.activeGarbage {
+	background: url(/public/img/garbage.png) bottom center no-repeat;
+}

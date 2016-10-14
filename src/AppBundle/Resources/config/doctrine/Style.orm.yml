@@ -1,0 +1,21 @@
+AppBundle\Entity\Style:
+    type: entity
+    table: style
+    repositoryClass: AppBundle\Repository\StyleRepository
+    id:
+        id:
+            type: smallint
+            id: true
+            generator:
+                strategy: AUTO
+            options:
+                unsigned: true
+    fields:
+        style:
+            type: string
+            length: '64'
+            unique: true
+        name:
+            type: string
+            length: 255
+    lifecycleCallbacks: {  }

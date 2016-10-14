@@ -1,0 +1,118 @@
+{% extends 'base.html.twig' %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('public/jslib/pages/Main/__init__.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('public/jslib/pages/Main/invite.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('public/jslib/pages/Main/createBoard.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('public/jslib/pages/Main/editBoard.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('public/jslib/pages/Main/deleteBoard.js') }}"></script>
+{% endblock %}
+
+{% block body_class %}Main{% endblock %}
+
+{% block body %}
+    <div id="wrapper">
+
+        <div class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <a class="brand" href="/">Very touchable board <sup>beta</sup></a>
+                </div>
+            </div>
+        </div>
+
+        <div id="content" class="project-list">
+            {% if boards | length == 0 %}
+            No active boards
+            {% else %}
+            <ul class="unstyled sortable">
+                {% for board in boards %}
+                <li class="project-{{ board.id }}">
+                    <h3>
+                        <a href="{{ path('board_view', {'id': board.id}) }}" class="title" target="_blank">{{ board.name }}</a>
+                        <a href="#edit" class="edit-project icon-cog" data-project-id="{{ board.id }}" title="Settings"><span class="hide">Settings</span></a>
+                        <a href="#delete" class="delete-project icon-trash" data-project-id="{{ board.id }}" title="Remove"><span class="hide">Remove</span></a>
+                    </h3>
+                    <div class="desc">{{ board.description }}</div>
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            <br />
+            <a href="#" class="create-project">I wanna new board</a>
+        </div>
+    </div>
+
+
+    <div id="modal-project" class="modal hide">
+        <form method="post" action="" class="form-horizontal">
+            <div class="modal-header">
+                <h3>Settings</h3>
+            </div>
+            <div class="modal-body">
+                <div class="control-group">
+                    <label class="control-label" for="input01">Name</label>
+                    <div class="controls">
+                        <input type="text" class="input-xlarge title" id="input01" name="title" />
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="textarea">Description</label>
+                    <div class="controls">
+                        <textarea class="input-xlarge description" name="description" id="textarea" rows="4"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="cancel btn">Cancel</button>
+                <button class="apply btn btn-success">Create</button>
+            </div>
+        </form>
+    </div>
+
+
+
+    <div id="modal-project-edit" class="modal hide">
+        <form method="post" action="" class="form-horizontal">
+            <div class="modal-header">
+                <h3>Settings</h3>
+                <input type="hidden" class="project-id" value="" />
+            </div>
+            <div class="modal-body">
+                <div class="control-group">
+                    <label class="control-label" for="input01">Name</label>
+                    <div class="controls">
+                        <input type="text" class="input-xlarge title" id="input01" name="title" />
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="textarea">Description</label>
+                    <div class="controls">
+                        <textarea class="input-xlarge description" name="description" id="textarea" rows="4"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="cancel btn">Cancel</button>
+                <button class="apply btn btn-success">Submit</button>
+            </div>
+        </form>
+    </div>
+
+
+
+    <div id="modal-project-delete" class="modal hide">
+        <form class="form-horizontal">
+            <div class="modal-header">
+                <h3>Remove board?</h3>
+                <input type="hidden" class="project-id" value="" />
+            </div>
+            <div class="modal-footer">
+                <button class="cancel btn">Cancel</button>
+                <button class="apply btn btn-danger">Remove</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+

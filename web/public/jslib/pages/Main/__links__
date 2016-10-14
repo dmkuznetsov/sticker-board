@@ -1,0 +1,7 @@
+<!-- pages/Main : pages -->
+<script type="text/javascript" src="./images/jslib/pages/Main/__init__.js"></script>
+<script type="text/javascript" src="./images/jslib/pages/Main/invite.js"></script>
+<script type="text/javascript" src="./images/jslib/pages/Main/createBoard.js"></script>
+<script type="text/javascript" src="./images/jslib/pages/Main/editBoard.js"></script>
+<script type="text/javascript" src="./images/jslib/pages/Main/deleteBoard.js"></script>
+<!-- /pages/Main : pages -->
