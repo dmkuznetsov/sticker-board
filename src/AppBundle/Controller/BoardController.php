@@ -35,18 +35,17 @@ class BoardController extends Controller
     public function viewAction(Request $request)
     {
         /** @var Board $board */
-        $board = $this->get('doctrine.orm.entity_manager')->getRepository(Board::class)->find($request->get('id'));
+        $board = $this->get('doctrine.orm.entity_manager')->getRepository(Board::class)->find((int)$request->get('id'));
         /** @var Sticker[] $stickerEntities */
         $stickerEntities = $board->getStickers();
         $stickers = [];
         foreach ($stickerEntities as $stickerEntity) {
-            $style = $stickerEntity->getStyle();
             $stickers[] = [
                 'id' => $stickerEntity->getId(),
-                'style' => $style ? : Sticker::STYLE_GREEN,
+                'style' => $stickerEntity->getStyle() ? : Sticker::STYLE_GREEN,
                 'left' => $stickerEntity->getPositionX(),
                 'top' => $stickerEntity->getPositionY(),
-                'font' => $stickerEntity->getSize(),
+                'font' => $stickerEntity->getSize() ? : Sticker::SIZE_SMALL,
                 'strike' => (int)$stickerEntity->getIsStriked(),
                 'text' => $stickerEntity->getText(),
             ];
@@ -91,15 +90,20 @@ class BoardController extends Controller
      * @Method("GET")
      * @param Request $request
      * @return JsonResponse
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     public function editProcessActon(Request $request)
     {
-        $boardId = $request->get('project');
+        $boardId = (int)$request->get('project');
         $title = $request->get('title');
         $description = $request->get('description');
 
         /** @var Board $board */
         $board = $this->get('doctrine.orm.entity_manager')->getRepository(Board::class)->find($boardId);
+        if (!$board) {
+            throw $this->createNotFoundException();
+        }
+
         $board
             ->setName($title)
             ->setDescription($description);
@@ -124,7 +128,11 @@ class BoardController extends Controller
         $boardId = $request->get('project');
 
         /** @var Board $board */
-        $board = $this->get('doctrine.orm.entity_manager')->getRepository(Board::class)->find($boardId);
+        $board = $this->get('doctrine.orm.entity_manager')->getRepository(Board::class)->find((int)$boardId);
+        if (!$board) {
+            throw $this->createNotFoundException();
+        }
+
         $this->get('doctrine.orm.entity_manager')->remove($board);
         $this->get('doctrine.orm.entity_manager')->flush();
 

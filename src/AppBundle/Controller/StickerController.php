@@ -17,11 +17,16 @@ class StickerController extends Controller
      * @Method("GET")
      * @param Request $request
      * @return JsonResponse
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     public function listProcessAction(Request $request)
     {
         /** @var Board $board */
-        $board = $this->get('doctrine.orm.entity_manager')->getRepository(Board::class)->find($request->get('id'));
+        $board = $this->get('doctrine.orm.entity_manager')->getRepository(Board::class)->find((int)$request->get('id'));
+        if (!$board) {
+            throw $this->createNotFoundException();
+        }
+
         /** @var Sticker[] $stickerEntities */
         $stickerEntities = $board->getStickers();
         $stickers = [];
@@ -45,6 +50,7 @@ class StickerController extends Controller
      * @Method("GET")
      * @param Request $request
      * @return JsonResponse
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     public function createProcessAction(Request $request)
     {
@@ -53,14 +59,16 @@ class StickerController extends Controller
 
         $em = $this->get('doctrine.orm.entity_manager');
         /** @var Board $board */
-        $board = $em->getRepository(Board::class)->find($request->get('project'));
+        $board = $em->getRepository(Board::class)->find((int)$request->get('project'));
+        if (!$board) {
+            throw $this->createNotFoundException();
+        }
 
         $sticker = new Sticker();
         $sticker
             ->setBoard($board)
-            ->setPositionX($left)
-            ->setPositionY($top)
-            ->setStyle(Sticker::STYLE_GREEN);
+            ->setPositionX((int)$left)
+            ->setPositionY((int)$top);
         $em = $this->get('doctrine.orm.entity_manager');
         $em->persist($sticker);
         $em->flush($sticker);
@@ -81,25 +89,30 @@ class StickerController extends Controller
      * @Method("GET")
      * @param Request $request
      * @return JsonResponse
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     public function editProcessAction(Request $request)
     {
-        $id = $request->get('id');
-        $left = $request->get('left');
-        $top = $request->get('top');
-        $style = $request->get('style');
+        $id = (int)$request->get('id');
+        $left = (int)$request->get('left');
+        $top = (int)$request->get('top');
+        $style = Sticker::checkStyle($request->get('style'));
         $text = $request->get('text', '');
-        $size = $request->get('font', 'small');
-        $strike = $request->get('strike', 0);
+        $size = Sticker::checkSize($request->get('font'));
+        $strike = $request->get('strike', 0) ? true : false;
 
         $em = $this->get('doctrine.orm.entity_manager');
         /** @var Sticker $sticker */
         $sticker = $em->getRepository(Sticker::class)->find($id);
+        if (!$sticker) {
+            throw $this->createNotFoundException();
+        }
+
         $sticker
             ->setPositionX($left)
             ->setPositionY($top)
-            ->setStyle(Sticker::checkStyle($style))
-            ->setSize(Sticker::checkSize($size))
+            ->setStyle($style)
+            ->setSize($size)
             ->setIsStriked($strike)
             ->setText($text);
         $em->flush($sticker);
@@ -112,12 +125,17 @@ class StickerController extends Controller
      * @Method("GET")
      * @param Request $request
      * @return JsonResponse
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     public function deleteProcessAction(Request $request)
     {
         $em = $this->get('doctrine.orm.entity_manager');
         /** @var Sticker $sticker */
-        $sticker = $em->getRepository(Sticker::class)->find($request->get('id'));
+        $sticker = $em->getRepository(Sticker::class)->find((int)$request->get('id'));
+        if (!$sticker) {
+            throw $this->createNotFoundException();
+        }
+
         $em->remove($sticker);
         $em->flush();
 
