@@ -73,7 +73,7 @@ window.CaterJS.pages.Main.createBoard = (function() {
         var html = [
             '<li class="project-' + id + '">'
             , '<h3>'
-            , '<a href="/board/' + id + '" target="_blank" class="title">' + title + '</a>'
+            , '<a href="/' + id + '" target="_blank" class="title">' + title + '</a>'
             , ' <a href="#edit" class="edit-project icon-pencil" data-project-id="' + id + '" title="Редактировать"><span class="hide">Редактировать</span></a>'
             , ' <a href="#delete" class="delete-project icon-trash" data-project-id="' + id + '" title="Удалить"><span class="hide">Удалить</span></a>'
             , '</h3>'
