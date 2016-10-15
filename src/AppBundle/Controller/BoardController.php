@@ -127,14 +127,22 @@ class BoardController extends Controller
     {
         $boardId = $request->get('project');
 
+        $em = $this->get('doctrine.orm.entity_manager');
         /** @var Board $board */
-        $board = $this->get('doctrine.orm.entity_manager')->getRepository(Board::class)->find((int)$boardId);
+        $board = $em->getRepository(Board::class)->find((int)$boardId);
         if (!$board) {
             throw $this->createNotFoundException();
         }
 
-        $this->get('doctrine.orm.entity_manager')->remove($board);
-        $this->get('doctrine.orm.entity_manager')->flush();
+        $stickers = $em->getRepository(Sticker::class)->findBy(['board' => $board->getId()]);
+        if (count($stickers)) {
+            foreach ($stickers as $sticker) {
+                $em->remove($sticker);
+            }
+            $em->flush();
+        }
+        $em->remove($board);
+        $em->flush();
 
         return new JsonResponse([]);
     }
