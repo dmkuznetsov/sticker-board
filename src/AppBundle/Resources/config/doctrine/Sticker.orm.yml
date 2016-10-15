@@ -20,6 +20,9 @@ AppBundle\Entity\Sticker:
         text:
             type: text
             nullable: true
+        style:
+            type: string
+            length: '32'
         size:
             type: string
             length: '32'
@@ -33,11 +36,6 @@ AppBundle\Entity\Sticker:
             inversedBy: stickers
             joinColumn:
                 name: board_id
-                referencedColumnName: id
-        style:
-            targetEntity: Style
-            joinColumn:
-                name: style_id
                 referencedColumnName: id
 
     lifecycleCallbacks: {  }

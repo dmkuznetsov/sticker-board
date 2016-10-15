@@ -10,6 +10,14 @@ class Sticker
     const SIZE_SMALL = 'small';
     const SIZE_MEDIUM = 'medium';
     const SIZE_BIG = 'big';
+
+    const STYLE_GREEN = 'green';
+    const STYLE_YELLOW = 'yellow';
+    const STYLE_ORANGE = 'orange';
+    const STYLE_RED = 'red';
+    const STYLE_PURPLE = 'purple';
+    const STYLE_BLUE = 'blue';
+    const STYLE_LIGHT_BLUE = 'light-blue';
     /**
      * @var int
      */
@@ -44,9 +52,47 @@ class Sticker
      */
     private $board;
     /**
-     * @var \AppBundle\Entity\Style
+     * @var string
      */
-    private $style;
+    private $style = self::STYLE_GREEN;
+
+    public static function checkStyle($style)
+    {
+        if (in_array($style, self::getStyles(), true)) {
+            return $style;
+        }
+        return self::STYLE_GREEN;
+    }
+
+    public static function getStyles()
+    {
+        return [
+            self::STYLE_GREEN,
+            self::STYLE_YELLOW,
+            self::STYLE_ORANGE,
+            self::STYLE_RED,
+            self::STYLE_PURPLE,
+            self::STYLE_BLUE,
+            self::STYLE_LIGHT_BLUE,
+        ];
+    }
+
+    public static function checkSize($size)
+    {
+        if (in_array($size, self::getSizes(), true)) {
+            return $size;
+        }
+        return self::SIZE_SMALL;
+    }
+
+    public static function getSizes()
+    {
+        return [
+            self::SIZE_SMALL,
+            self::SIZE_MEDIUM,
+            self::SIZE_BIG,
+        ];
+    }
 
     /**
      * Get id
@@ -205,7 +251,7 @@ class Sticker
     /**
      * Get style
      *
-     * @return \AppBundle\Entity\Style
+     * @return string
      */
     public function getStyle()
     {
@@ -215,11 +261,11 @@ class Sticker
     /**
      * Set style
      *
-     * @param \AppBundle\Entity\Style $style
+     * @param string $style
      *
      * @return Sticker
      */
-    public function setStyle(\AppBundle\Entity\Style $style = null)
+    public function setStyle($style)
     {
         $this->style = $style;
 

@@ -30,8 +30,7 @@ class StickerController extends Controller
             $stickers[] = [
                 'id' => $stickerEntity->getId(),
                 'strike' => $stickerEntity->getIsStriked(),
-                'style_id' => $stickerEntity->getStyle()->getId(),
-                'style' => $stickerEntity->getStyle()->getStyle(),
+                'style' => $stickerEntity->getStyle(),
                 'left' => $stickerEntity->getPositionX(),
                 'top' => $stickerEntity->getPositionY(),
                 'font' => $stickerEntity->getSize(),
@@ -62,7 +61,7 @@ class StickerController extends Controller
             ->setBoard($board)
             ->setPositionX($left)
             ->setPositionY($top)
-            ->setStyle($em->getRepository(Style::class)->findFirst());
+            ->setStyle(Sticker::STYLE_GREEN);
         $em = $this->get('doctrine.orm.entity_manager');
         $em->persist($sticker);
         $em->flush($sticker);
@@ -70,8 +69,7 @@ class StickerController extends Controller
         return new JsonResponse([
             'id' => $sticker->getId(),
             'strike' => $sticker->getIsStriked(),
-            'style_id' => $sticker->getStyle()->getId(),
-            'style' => $sticker->getStyle()->getStyle(),
+            'style' => $sticker->getStyle(),
             'left' => $sticker->getPositionX(),
             'top' => $sticker->getPositionY(),
             'font' => $sticker->getSize(),
@@ -101,8 +99,8 @@ class StickerController extends Controller
         $sticker
             ->setPositionX($left)
             ->setPositionY($top)
-            ->setStyle($em->getRepository(Style::class)->findOneBy(['style' => $style]))
-            ->setSize($size)
+            ->setStyle(Sticker::checkStyle($style))
+            ->setSize(Sticker::checkSize($size))
             ->setIsStriked($strike)
             ->setText($text);
         $em->flush($sticker);

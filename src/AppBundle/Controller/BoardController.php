@@ -35,8 +35,6 @@ class BoardController extends Controller
      */
     public function viewAction(Request $request)
     {
-        /** @var Style[] $styles */
-        $styles = $this->get('doctrine.orm.entity_manager')->getRepository(Style::class)->findAll();
         /** @var Board $board */
         $board = $this->get('doctrine.orm.entity_manager')->getRepository(Board::class)->find($request->get('id'));
         /** @var Sticker[] $stickerEntities */
@@ -46,8 +44,7 @@ class BoardController extends Controller
             $style = $stickerEntity->getStyle();
             $stickers[] = [
                 'id' => $stickerEntity->getId(),
-                'style_id' => $style ? $style->getId() : 1,
-                'style' => $style ? $style->getStyle() : 'green',
+                'style' => $style ? : Sticker::STYLE_GREEN,
                 'left' => $stickerEntity->getPositionX(),
                 'top' => $stickerEntity->getPositionY(),
                 'font' => $stickerEntity->getSize(),
@@ -59,7 +56,7 @@ class BoardController extends Controller
         return $this->render(':board:view.html.twig', [
             'board' => $board,
             'stickers' => $stickers,
-            'styles' => $styles,
+            'styles' => Sticker::getStyles(),
         ]);
     }
 
